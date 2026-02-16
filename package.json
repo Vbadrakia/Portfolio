@@ -1,0 +1,12 @@
+{
+  "name": "vedant-portfolio",
+  "version": "1.0.0",
+  "description": "Personal portfolio website for Vedant Badrakia",
+  "scripts": {
+    "dev": "echo 'Static site - open index.html in browser'",
+    "build": "echo 'No build needed for static site'"
+  },
+  "keywords": ["portfolio", "static"],
+  "author": "Vedant Badrakia",
+  "license": "MIT"
+}
