@@ -9,61 +9,310 @@
     <script src="https://unpkg.com/lucide@latest"></script>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;800&display=swap" rel="stylesheet">
     <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
         body {
             font-family: 'Inter', sans-serif;
             background-color: #020617;
+            overflow-x: hidden;
         }
 
+        /* ===== GLASS NAV ===== */
         .glass-nav {
             background: rgba(2, 6, 23, 0.8);
             backdrop-filter: blur(12px);
             border-bottom: 1px solid rgba(255, 255, 255, 0.1);
         }
 
+        /* ===== HERO GRADIENT ===== */
         .hero-gradient {
             background: radial-gradient(circle at 50% 50%, rgba(79, 70, 229, 0.15) 0%, transparent 50%);
+            position: relative;
         }
 
+        /* ===== FLOATING GLOW ORBS ===== */
+        .orb {
+            position: fixed;
+            border-radius: 50%;
+            filter: blur(80px);
+            opacity: 0.4;
+            pointer-events: none;
+            z-index: 0;
+        }
+        .orb-1 {
+            width: 400px; height: 400px;
+            background: rgba(99, 102, 241, 0.3);
+            top: -100px; left: -100px;
+            animation: orbFloat1 8s ease-in-out infinite;
+        }
+        .orb-2 {
+            width: 350px; height: 350px;
+            background: rgba(6, 182, 212, 0.25);
+            bottom: -50px; right: -80px;
+            animation: orbFloat2 10s ease-in-out infinite;
+        }
+        .orb-3 {
+            width: 300px; height: 300px;
+            background: rgba(139, 92, 246, 0.2);
+            top: 50%; left: 50%;
+            transform: translate(-50%, -50%);
+            animation: orbFloat3 12s ease-in-out infinite;
+        }
+        @keyframes orbFloat1 {
+            0%, 100% { transform: translate(0, 0); }
+            33% { transform: translate(80px, 120px); }
+            66% { transform: translate(-40px, 60px); }
+        }
+        @keyframes orbFloat2 {
+            0%, 100% { transform: translate(0, 0); }
+            33% { transform: translate(-60px, -100px); }
+            66% { transform: translate(50px, -50px); }
+        }
+        @keyframes orbFloat3 {
+            0%, 100% { transform: translate(-50%, -50%) scale(1); }
+            50% { transform: translate(-50%, -50%) scale(1.3); }
+        }
+
+        /* ===== SCROLL REVEAL ===== */
+        .reveal {
+            opacity: 0;
+            transform: translateY(40px);
+            transition: opacity 0.7s ease, transform 0.7s ease;
+        }
+        .reveal.active {
+            opacity: 1;
+            transform: translateY(0);
+        }
+        .reveal-left {
+            opacity: 0;
+            transform: translateX(-50px);
+            transition: opacity 0.7s ease, transform 0.7s ease;
+        }
+        .reveal-left.active {
+            opacity: 1;
+            transform: translateX(0);
+        }
+        .reveal-right {
+            opacity: 0;
+            transform: translateX(50px);
+            transition: opacity 0.7s ease, transform 0.7s ease;
+        }
+        .reveal-right.active {
+            opacity: 1;
+            transform: translateX(0);
+        }
+        .reveal-scale {
+            opacity: 0;
+            transform: scale(0.85);
+            transition: opacity 0.7s ease, transform 0.7s ease;
+        }
+        .reveal-scale.active {
+            opacity: 1;
+            transform: scale(1);
+        }
+
+        /* ===== NAME SHIMMER ===== */
+        .shimmer-text {
+            background: linear-gradient(
+                90deg,
+                #ffffff 0%,
+                #818cf8 25%,
+                #06b6d4 50%,
+                #818cf8 75%,
+                #ffffff 100%
+            );
+            background-size: 300% 100%;
+            -webkit-background-clip: text;
+            background-clip: text;
+            -webkit-text-fill-color: transparent;
+            animation: shimmer 4s ease-in-out infinite;
+        }
+        @keyframes shimmer {
+            0% { background-position: 100% 50%; }
+            50% { background-position: 0% 50%; }
+            100% { background-position: 100% 50%; }
+        }
+
+        /* ===== HERO FADE-IN ===== */
         .animate-fade-in {
-            animation: fadeIn 1s ease-out forwards;
+            animation: fadeIn 0.8s ease-out forwards;
         }
-
         @keyframes fadeIn {
-            from {
-                opacity: 0;
-                transform: translateY(20px);
-            }
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
+            from { opacity: 0; transform: translateY(25px); }
+            to { opacity: 1; transform: translateY(0); }
         }
 
+        /* ===== STAGGERED CHILDREN ===== */
+        .stagger-children > * {
+            opacity: 0;
+            transform: translateY(15px);
+            transition: opacity 0.5s ease, transform 0.5s ease;
+        }
+        .stagger-children.active > *:nth-child(1) { transition-delay: 0.05s; }
+        .stagger-children.active > *:nth-child(2) { transition-delay: 0.1s; }
+        .stagger-children.active > *:nth-child(3) { transition-delay: 0.15s; }
+        .stagger-children.active > *:nth-child(4) { transition-delay: 0.2s; }
+        .stagger-children.active > *:nth-child(5) { transition-delay: 0.25s; }
+        .stagger-children.active > *:nth-child(6) { transition-delay: 0.3s; }
+        .stagger-children.active > * {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* ===== SKILL BADGES ===== */
         .skill-badge {
             transition: all 0.3s ease;
         }
-
         .skill-badge:hover {
-            transform: translateY(-2px);
+            transform: translateY(-3px) scale(1.05);
             border-color: #6366f1;
-            background: rgba(99, 102, 241, 0.1);
+            background: rgba(99, 102, 241, 0.15);
+            box-shadow: 0 8px 25px rgba(99, 102, 241, 0.2);
+        }
+
+        /* ===== PROJECT CARD 3D TILT ===== */
+        .tilt-card {
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            transform-style: preserve-3d;
+            perspective: 1000px;
+        }
+        .tilt-card:hover {
+            box-shadow: 0 20px 60px rgba(99, 102, 241, 0.15);
+        }
+
+        /* ===== MAGNETIC BUTTON ===== */
+        .magnetic-btn {
+            transition: transform 0.25s ease;
+        }
+
+        /* ===== HIRE ME PULSE ===== */
+        .hire-pulse {
+            position: relative;
+            overflow: hidden;
+        }
+        .hire-pulse::before {
+            content: '';
+            position: absolute;
+            top: 0; left: -100%;
+            width: 100%; height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent);
+            animation: hireSweep 3s ease-in-out infinite;
+        }
+        @keyframes hireSweep {
+            0% { left: -100%; }
+            50% { left: 100%; }
+            100% { left: 100%; }
+        }
+
+        /* ===== TYPING CURSOR ===== */
+        .typing-cursor::after {
+            content: '|';
+            animation: blink 0.8s step-end infinite;
+            color: #818cf8;
+            font-weight: 300;
+        }
+        @keyframes blink {
+            50% { opacity: 0; }
+        }
+
+        /* ===== BENTO CARD HOVER ===== */
+        .bento-card {
+            transition: transform 0.4s ease, box-shadow 0.4s ease;
+        }
+        .bento-card:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 12px 40px rgba(99, 102, 241, 0.12);
+        }
+
+        /* ===== NAV LINK UNDERLINE ===== */
+        .nav-link {
+            position: relative;
+        }
+        .nav-link::after {
+            content: '';
+            position: absolute;
+            bottom: -4px; left: 0;
+            width: 0; height: 2px;
+            background: #818cf8;
+            transition: width 0.3s ease;
+            border-radius: 1px;
+        }
+        .nav-link:hover::after {
+            width: 100%;
+        }
+
+        /* ===== PARTICLE CANVAS ===== */
+        #particle-canvas {
+            position: fixed;
+            top: 0; left: 0;
+            width: 100%; height: 100%;
+            pointer-events: none;
+            z-index: 0;
+        }
+
+        /* ===== SECTION Z-INDEX ===== */
+        section, nav, footer {
+            position: relative;
+            z-index: 1;
+        }
+
+        /* ===== FOOTER LINK HOVER ===== */
+        .footer-social {
+            transition: transform 0.3s ease, color 0.3s ease;
+        }
+        .footer-social:hover {
+            transform: translateY(-3px) scale(1.15);
+        }
+
+        /* ===== SMOOTH SCROLL INDICATOR ===== */
+        .scroll-indicator {
+            animation: scrollBounce 2s ease-in-out infinite;
+        }
+        @keyframes scrollBounce {
+            0%, 100% { transform: translateY(0); opacity: 1; }
+            50% { transform: translateY(10px); opacity: 0.5; }
+        }
+
+        /* ===== PROJECT BUTTON SHINE ===== */
+        .btn-shine {
+            position: relative;
+            overflow: hidden;
+        }
+        .btn-shine::after {
+            content: '';
+            position: absolute;
+            top: 0; left: -75%;
+            width: 50%; height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.15), transparent);
+            transition: left 0.5s ease;
+        }
+        .btn-shine:hover::after {
+            left: 125%;
         }
     </style>
 </head>
 
 <body class="text-slate-300">
 
+    <!-- Floating Glow Orbs -->
+    <div class="orb orb-1"></div>
+    <div class="orb orb-2"></div>
+    <div class="orb orb-3"></div>
+
+    <!-- Particle Canvas -->
+    <canvas id="particle-canvas"></canvas>
+
     <!-- Navigation -->
     <nav class="fixed top-0 w-full z-50 glass-nav">
         <div class="max-w-6xl mx-auto px-6 py-4 flex justify-between items-center">
             <span class="text-2xl font-extrabold bg-gradient-to-r from-indigo-400 to-cyan-400 bg-clip-text text-transparent underline decoration-indigo-500/20 underline-offset-4">VB.</span>
             <div class="hidden md:flex gap-8 text-sm font-medium tracking-wide">
-                <a href="#about" class="hover:text-indigo-400 transition-colors">About</a>
-                <a href="#skills" class="hover:text-indigo-400 transition-colors">Skills</a>
-                <a href="#projects" class="hover:text-indigo-400 transition-colors">Projects</a>
-                <a href="#achievements" class="hover:text-indigo-400 transition-colors">Achievements</a>
+                <a href="#about" class="nav-link hover:text-indigo-400 transition-colors">About</a>
+                <a href="#skills" class="nav-link hover:text-indigo-400 transition-colors">Skills</a>
+                <a href="#projects" class="nav-link hover:text-indigo-400 transition-colors">Projects</a>
+                <a href="#achievements" class="nav-link hover:text-indigo-400 transition-colors">Achievements</a>
             </div>
-            <a href="https://mail.google.com/mail/?view=cm&to=vedantbadrakia07@gmail.com&su=Hiring%20Inquiry%20-%20Vedant%20Badrakia" target="_blank" rel="noopener noreferrer" class="bg-indigo-600 hover:bg-indigo-500 text-white px-5 py-2 rounded-full text-xs font-bold transition-all">HIRE ME</a>
+            <a href="https://mail.google.com/mail/?view=cm&to=vedantbadrakia07@gmail.com&su=Hiring%20Inquiry%20-%20Vedant%20Badrakia" target="_blank" rel="noopener noreferrer" class="hire-pulse bg-indigo-600 hover:bg-indigo-500 text-white px-5 py-2 rounded-full text-xs font-bold transition-all">HIRE ME</a>
         </div>
     </nav>
 
@@ -72,37 +321,40 @@
         <div class="max-w-4xl mx-auto text-center md:text-left">
             <div class="animate-fade-in">
                 <p class="text-indigo-400 font-mono mb-4 text-sm tracking-widest uppercase">Available for Internships 2026</p>
-                <h1 class="text-6xl md:text-8xl font-extrabold text-white mb-6 leading-tight">
-                    VEDANT <br />
+                <h1 class="text-6xl md:text-8xl font-extrabold mb-6 leading-tight">
+                    <span class="shimmer-text">VEDANT</span> <br />
                     <span class="text-slate-600">BADRAKIA</span>
                 </h1>
-                <p class="text-lg md:text-xl text-slate-400 max-w-2xl mb-10 leading-relaxed">
-                    Computer Engineering student at <span class="text-indigo-300">VVP Engineering College</span>. 
-                    Building high-performance web applications with a focus on user experience and clean code.
-                </p>
+                <p id="typing-text" class="typing-cursor text-lg md:text-xl text-slate-400 max-w-2xl mb-10 leading-relaxed"></p>
                 <div class="flex flex-col md:flex-row gap-4 items-center">
                     <div class="flex gap-4">
-                        <a href="https://github.com/Vbadrakia" target="_blank" rel="noopener noreferrer" class="p-3 bg-slate-800 rounded-xl hover:bg-indigo-600 transition-all text-white"><i data-lucide="github"></i></a>
-                        <a href="https://www.linkedin.com/in/vedant-badrakia/" target="_blank" rel="noopener noreferrer" class="p-3 bg-slate-800 rounded-xl hover:bg-indigo-600 transition-all text-white"><i data-lucide="linkedin"></i></a>
-                        <a href="https://mail.google.com/mail/?view=cm&to=vedantbadrakia07@gmail.com" target="_blank" rel="noopener noreferrer" class="p-3 bg-slate-800 rounded-xl hover:bg-indigo-600 transition-all text-white"><i data-lucide="mail"></i></a>
+                        <a href="https://github.com/Vbadrakia" target="_blank" rel="noopener noreferrer" class="magnetic-btn p-3 bg-slate-800 rounded-xl hover:bg-indigo-600 transition-all text-white"><i data-lucide="github"></i></a>
+                        <a href="https://www.linkedin.com/in/vedant-badrakia/" target="_blank" rel="noopener noreferrer" class="magnetic-btn p-3 bg-slate-800 rounded-xl hover:bg-indigo-600 transition-all text-white"><i data-lucide="linkedin"></i></a>
+                        <a href="https://mail.google.com/mail/?view=cm&to=vedantbadrakia07@gmail.com" target="_blank" rel="noopener noreferrer" class="magnetic-btn p-3 bg-slate-800 rounded-xl hover:bg-indigo-600 transition-all text-white"><i data-lucide="mail"></i></a>
                     </div>
                     <span class="hidden md:block h-px w-12 bg-slate-700"></span>
-                    <span class="text-slate-500 text-sm font-mono italic">Bachelor of Engineering (8.13 SPI)</span>
+                    <span class="text-slate-500 text-sm font-mono italic">Bachelor of Engineering (<span id="spi-counter">0.00</span> SPI)</span>
                 </div>
             </div>
+        </div>
+        <!-- Scroll indicator -->
+        <div class="flex justify-center mt-16">
+            <a href="#skills" class="scroll-indicator text-slate-600 hover:text-indigo-400 transition-colors">
+                <i data-lucide="chevrons-down" class="h-6 w-6"></i>
+            </a>
         </div>
     </section>
 
     <!-- Skills Section -->
     <section id="skills" class="py-24 px-6 bg-slate-900/30">
         <div class="max-w-6xl mx-auto">
-            <h2 class="text-3xl font-bold text-white mb-12 flex items-center gap-3">
+            <h2 class="text-3xl font-bold text-white mb-12 flex items-center gap-3 reveal">
                 <i data-lucide="terminal" class="text-indigo-400"></i> Skill Set
             </h2>
             <div class="grid md:grid-cols-3 gap-8">
-                <div class="p-8 bg-slate-900 border border-slate-800 rounded-3xl">
+                <div class="p-8 bg-slate-900 border border-slate-800 rounded-3xl reveal bento-card" style="transition-delay: 0.1s;">
                     <h3 class="text-xs font-bold text-indigo-400 uppercase tracking-widest mb-6">Languages</h3>
-                    <div class="flex flex-wrap gap-2">
+                    <div class="flex flex-wrap gap-2 stagger-children">
                         <span class="px-4 py-2 bg-slate-800 rounded-lg text-sm border border-slate-700 skill-badge">Java</span>
                         <span class="px-4 py-2 bg-slate-800 rounded-lg text-sm border border-slate-700 skill-badge">JavaScript</span>
                         <span class="px-4 py-2 bg-slate-800 rounded-lg text-sm border border-slate-700 skill-badge">CSS</span>
@@ -111,19 +363,19 @@
                         <span class="px-4 py-2 bg-slate-800 rounded-lg text-sm border border-slate-700 skill-badge">MySQL</span>
                     </div>
                 </div>
-                <div class="p-8 bg-slate-900 border border-slate-800 rounded-3xl">
+                <div class="p-8 bg-slate-900 border border-slate-800 rounded-3xl reveal bento-card" style="transition-delay: 0.25s;">
                     <h3 class="text-xs font-bold text-cyan-400 uppercase tracking-widest mb-6">Frameworks</h3>
-                    <div class="flex flex-wrap gap-2">
+                    <div class="flex flex-wrap gap-2 stagger-children">
                         <span class="px-4 py-2 bg-slate-800 rounded-lg text-sm border border-slate-700 skill-badge">React.js</span>
                         <span class="px-4 py-2 bg-slate-800 rounded-lg text-sm border border-slate-700 skill-badge">Node.js</span>
                         <span class="px-4 py-2 bg-slate-800 rounded-lg text-sm border border-slate-700 skill-badge">Bootstrap</span>
                         <span class="px-4 py-2 bg-slate-800 rounded-lg text-sm border border-slate-700 skill-badge">TailwindCSS</span>
                     </div>
                 </div>
-                <div class="p-8 bg-slate-900 border border-slate-800 rounded-3xl">
+                <div class="p-8 bg-slate-900 border border-slate-800 rounded-3xl reveal bento-card" style="transition-delay: 0.4s;">
                     <h3 class="text-xs font-bold text-purple-400 uppercase tracking-widest mb-6">Tools</h3>
-                    <div class="flex flex-wrap gap-2">
-                        <span class="px-4 py-2 bg-slate-800 rounded-lg text-sm border border-slate-700 skill-badge">GitHUb</span>
+                    <div class="flex flex-wrap gap-2 stagger-children">
+                        <span class="px-4 py-2 bg-slate-800 rounded-lg text-sm border border-slate-700 skill-badge">GitHub</span>
                         <span class="px-4 py-2 bg-slate-800 rounded-lg text-sm border border-slate-700 skill-badge">AI Tools</span>
                         <span class="px-4 py-2 bg-slate-800 rounded-lg text-sm border border-slate-700 skill-badge">VS Code</span>
                     </div>
@@ -137,16 +389,16 @@
         <div class="max-w-6xl mx-auto">
             <div class="flex justify-between items-end mb-12">
                 <div>
-                    <h2 class="text-3xl font-bold text-white flex items-center gap-3">
+                    <h2 class="text-3xl font-bold text-white flex items-center gap-3 reveal">
                         <i data-lucide="cpu" class="text-indigo-400"></i> Projects
                     </h2>
                 </div>
-                <a href="https://github.com/Vbadrakia" target="_blank" rel="noopener noreferrer" class="text-sm text-indigo-400 hover:underline">View GitHub <i data-lucide="external-link" class="inline h-3 w-3"></i></a>
+                <a href="https://github.com/Vbadrakia" target="_blank" rel="noopener noreferrer" class="text-sm text-indigo-400 hover:underline reveal">View GitHub <i data-lucide="external-link" class="inline h-3 w-3"></i></a>
             </div>
             
             <div class="grid md:grid-cols-2 gap-10">
                 <!-- Project Card 1 -->
-                <div class="group bg-slate-900 rounded-[2rem] border border-slate-800 p-1 hover:border-indigo-500/50 transition-all">
+                <div class="tilt-card group bg-slate-900 rounded-[2rem] border border-slate-800 p-1 hover:border-indigo-500/50 transition-all reveal-left">
                     <div class="bg-slate-950 rounded-[1.8rem] p-8">
                         <div class="flex justify-between mb-6">
                             <div class="px-3 py-1 bg-indigo-500/10 text-indigo-400 text-[10px] font-bold tracking-tighter rounded uppercase">MERN STACK</div>
@@ -162,10 +414,10 @@
                             <span class="text-[10px] bg-slate-800 px-2 py-1 rounded">Node.js</span>
                         </div>
                         <div class="flex gap-3">
-                            <a href="https://b13f82e6.swiftery.pages.dev/" target="_blank" rel="noopener noreferrer" class="flex-1 py-3 bg-indigo-600 hover:bg-indigo-500 text-white font-bold rounded-xl flex items-center justify-center gap-2 transition-all text-sm">
+                            <a href="https://b13f82e6.swiftery.pages.dev/" target="_blank" rel="noopener noreferrer" class="btn-shine flex-1 py-3 bg-indigo-600 hover:bg-indigo-500 text-white font-bold rounded-xl flex items-center justify-center gap-2 transition-all text-sm">
                                 <i data-lucide="external-link" class="h-4 w-4"></i> Live Link
                             </a>
-                            <a href="https://github.com/Vbadrakia/Swiftery" target="_blank" rel="noopener noreferrer" class="flex-1 py-3 bg-slate-800 hover:bg-slate-700 text-white font-bold rounded-xl flex items-center justify-center gap-2 border border-slate-700 transition-all text-sm">
+                            <a href="https://github.com/Vbadrakia/Swiftery" target="_blank" rel="noopener noreferrer" class="btn-shine flex-1 py-3 bg-slate-800 hover:bg-slate-700 text-white font-bold rounded-xl flex items-center justify-center gap-2 border border-slate-700 transition-all text-sm">
                                 <i data-lucide="github" class="h-4 w-4"></i> Source Code
                             </a>
                         </div>
@@ -173,7 +425,7 @@
                 </div>
 
                 <!-- Project Card 2 -->
-                <div class="group bg-slate-900 rounded-[2rem] border border-slate-800 p-1 hover:border-cyan-500/50 transition-all">
+                <div class="tilt-card group bg-slate-900 rounded-[2rem] border border-slate-800 p-1 hover:border-cyan-500/50 transition-all reveal-right">
                     <div class="bg-slate-950 rounded-[1.8rem] p-8">
                         <div class="flex justify-between mb-6">
                             <div class="px-3 py-1 bg-cyan-500/10 text-cyan-400 text-[10px] font-bold tracking-tighter rounded uppercase">E-COMMERCE</div>
@@ -188,10 +440,10 @@
                             <span class="text-[10px] bg-slate-800 px-2 py-1 rounded">Context API</span>
                         </div>
                         <div class="flex gap-3">
-                            <a href="https://react-chocolateapp.pages.dev/" target="_blank" rel="noopener noreferrer" class="flex-1 py-3 bg-cyan-600 hover:bg-cyan-500 text-white font-bold rounded-xl flex items-center justify-center gap-2 transition-all text-sm">
+                            <a href="https://react-chocolateapp.pages.dev/" target="_blank" rel="noopener noreferrer" class="btn-shine flex-1 py-3 bg-cyan-600 hover:bg-cyan-500 text-white font-bold rounded-xl flex items-center justify-center gap-2 transition-all text-sm">
                                 <i data-lucide="external-link" class="h-4 w-4"></i> Live Link
                             </a>
-                            <a href="https://github.com/Vbadrakia/React-ChocolateParadise" target="_blank" rel="noopener noreferrer" class="flex-1 py-3 bg-slate-800 hover:bg-slate-700 text-white font-bold rounded-xl flex items-center justify-center gap-2 border border-slate-700 transition-all text-sm">
+                            <a href="https://github.com/Vbadrakia/React-ChocolateParadise" target="_blank" rel="noopener noreferrer" class="btn-shine flex-1 py-3 bg-slate-800 hover:bg-slate-700 text-white font-bold rounded-xl flex items-center justify-center gap-2 border border-slate-700 transition-all text-sm">
                                 <i data-lucide="github" class="h-4 w-4"></i> Source Code
                             </a>
                         </div>
@@ -204,12 +456,12 @@
     <!-- Achievements Bento Grid -->
     <section id="achievements" class="py-24 px-6 bg-indigo-950/20">
         <div class="max-w-6xl mx-auto">
-            <h2 class="text-3xl font-bold text-white mb-12 flex items-center gap-3">
+            <h2 class="text-3xl font-bold text-white mb-12 flex items-center gap-3 reveal">
                 <i data-lucide="award" class="text-indigo-400"></i> Honors
             </h2>
             
             <div class="grid grid-cols-1 md:grid-cols-4 gap-4 h-full">
-                <div class="md:col-span-2 md:row-span-2 bg-slate-900 p-8 rounded-3xl border border-slate-800 flex flex-col justify-between">
+                <div class="md:col-span-2 md:row-span-2 bg-slate-900 p-8 rounded-3xl border border-slate-800 flex flex-col justify-between reveal-scale bento-card">
                     <div>
                         <i data-lucide="book-open" class="text-indigo-400 mb-6"></i>
                         <h4 class="text-xl font-bold text-white mb-2">Certified Full-Stack Developer</h4>
@@ -221,16 +473,16 @@
                         <span class="text-xs font-bold text-slate-500">POSTMAN</span>
                     </div>
                 </div>
-                <div class="bg-indigo-600 p-6 rounded-3xl text-white">
+                <div class="bg-indigo-600 p-6 rounded-3xl text-white reveal-scale bento-card" style="transition-delay: 0.15s;">
                     <h4 class="font-bold mb-2">Event Lead</h4>
                     <p class="text-xs opacity-80 uppercase tracking-wider mb-2">Shaurya 2025</p>
                     <p class="text-sm">Coordinated Lab for National-Level Code-Relay fest.</p>
                 </div>
-                <div class="bg-slate-800 p-6 rounded-3xl border border-slate-700">
+                <div class="bg-slate-800 p-6 rounded-3xl border border-slate-700 reveal-scale bento-card" style="transition-delay: 0.3s;">
                     <h4 class="font-bold text-white mb-2 italic underline decoration-indigo-400">Badminton</h4>
                     <p class="text-sm text-slate-400">Inter-GTU First Runner-Up (Vice-Captain).</p>
                 </div>
-                <div class="md:col-span-2 bg-slate-900/50 p-6 rounded-3xl border border-dashed border-slate-700 flex items-center justify-center">
+                <div class="md:col-span-2 bg-slate-900/50 p-6 rounded-3xl border border-dashed border-slate-700 flex items-center justify-center reveal" style="transition-delay: 0.4s;">
                     <p class="text-slate-500 font-mono text-sm tracking-widest">
                         NEXT BIG PROJECT IN PROGRESS...</p>
                 </div>
@@ -241,17 +493,197 @@
     <!-- Footer -->
     <footer class="py-12 px-6 border-t border-slate-900">
         <div class="max-w-6xl mx-auto flex flex-col md:flex-row justify-between items-center gap-6">
-            <p class="text-slate-600 text-sm">© 2025 Vedant Badrakia. Designed for Excellence.</p>
+            <p class="text-slate-600 text-sm">&copy; 2025 Vedant Badrakia. Designed for Excellence.</p>
             <div class="flex gap-6">
-                <a href="https://github.com/Vbadrakia" target="_blank" rel="noopener noreferrer" class="text-slate-500 hover:text-white transition-colors"><i data-lucide="github" class="h-5 w-5"></i></a>
-                <a href="https://www.linkedin.com/in/vedant-badrakia/" target="_blank" rel="noopener noreferrer" class="text-slate-500 hover:text-white transition-colors"><i data-lucide="linkedin" class="h-5 w-5"></i></a>
-                <a href="https://mail.google.com/mail/?view=cm&to=vedantbadrakia07@gmail.com" target="_blank" rel="noopener noreferrer" class="text-slate-500 hover:text-white transition-colors"><i data-lucide="mail" class="h-5 w-5"></i></a>
+                <a href="https://github.com/Vbadrakia" target="_blank" rel="noopener noreferrer" class="footer-social text-slate-500 hover:text-white transition-colors"><i data-lucide="github" class="h-5 w-5"></i></a>
+                <a href="https://www.linkedin.com/in/vedant-badrakia/" target="_blank" rel="noopener noreferrer" class="footer-social text-slate-500 hover:text-white transition-colors"><i data-lucide="linkedin" class="h-5 w-5"></i></a>
+                <a href="https://mail.google.com/mail/?view=cm&to=vedantbadrakia07@gmail.com" target="_blank" rel="noopener noreferrer" class="footer-social text-slate-500 hover:text-white transition-colors"><i data-lucide="mail" class="h-5 w-5"></i></a>
             </div>
         </div>
     </footer>
 
     <script>
-        lucide.createIcons(); 
+        // Initialize Lucide Icons
+        lucide.createIcons();
+
+        // ===== 1. SCROLL REVEAL =====
+        function revealOnScroll() {
+            const reveals = document.querySelectorAll('.reveal, .reveal-left, .reveal-right, .reveal-scale, .stagger-children');
+            const windowHeight = window.innerHeight;
+            reveals.forEach(el => {
+                const top = el.getBoundingClientRect().top;
+                if (top < windowHeight - 80) {
+                    el.classList.add('active');
+                }
+            });
+        }
+        window.addEventListener('scroll', revealOnScroll);
+        window.addEventListener('load', revealOnScroll);
+
+        // ===== 2. TYPING EFFECT =====
+        const typingText = "Computer Engineering student at VVP Engineering College. Building high-performance web applications with a focus on user experience and clean code.";
+        const typingEl = document.getElementById('typing-text');
+        let charIndex = 0;
+
+        function typeWriter() {
+            if (charIndex < typingText.length) {
+                // Handle special text for "VVP Engineering College"
+                typingEl.innerHTML = formatTypedText(typingText.substring(0, charIndex + 1));
+                charIndex++;
+                setTimeout(typeWriter, 22);
+            } else {
+                typingEl.classList.remove('typing-cursor');
+            }
+        }
+
+        function formatTypedText(text) {
+            return text.replace('VVP Engineering College', '<span class="text-indigo-300">VVP Engineering College</span>');
+        }
+
+        setTimeout(typeWriter, 800);
+
+        // ===== 3. SPI COUNTER =====
+        const spiTarget = 8.13;
+        const spiEl = document.getElementById('spi-counter');
+        let spiCurrent = 0;
+        const spiDuration = 2000;
+        const spiSteps = 60;
+        const spiIncrement = spiTarget / spiSteps;
+        let spiStep = 0;
+
+        function animateSPI() {
+            if (spiStep < spiSteps) {
+                spiCurrent += spiIncrement;
+                spiEl.textContent = Math.min(spiCurrent, spiTarget).toFixed(2);
+                spiStep++;
+                setTimeout(animateSPI, spiDuration / spiSteps);
+            } else {
+                spiEl.textContent = spiTarget.toFixed(2);
+            }
+        }
+        setTimeout(animateSPI, 1200);
+
+        // ===== 4. 3D TILT ON PROJECT CARDS =====
+        document.querySelectorAll('.tilt-card').forEach(card => {
+            card.addEventListener('mousemove', e => {
+                const rect = card.getBoundingClientRect();
+                const x = e.clientX - rect.left;
+                const y = e.clientY - rect.top;
+                const centerX = rect.width / 2;
+                const centerY = rect.height / 2;
+                const rotateX = ((y - centerY) / centerY) * -6;
+                const rotateY = ((x - centerX) / centerX) * 6;
+                card.style.transform = `perspective(1000px) rotateX(${rotateX}deg) rotateY(${rotateY}deg)`;
+            });
+            card.addEventListener('mouseleave', () => {
+                card.style.transform = 'perspective(1000px) rotateX(0) rotateY(0)';
+            });
+        });
+
+        // ===== 5. MAGNETIC BUTTONS =====
+        document.querySelectorAll('.magnetic-btn').forEach(btn => {
+            btn.addEventListener('mousemove', e => {
+                const rect = btn.getBoundingClientRect();
+                const x = e.clientX - rect.left - rect.width / 2;
+                const y = e.clientY - rect.top - rect.height / 2;
+                btn.style.transform = `translate(${x * 0.3}px, ${y * 0.3}px)`;
+            });
+            btn.addEventListener('mouseleave', () => {
+                btn.style.transform = 'translate(0, 0)';
+            });
+        });
+
+        // ===== 6. PARTICLE BACKGROUND =====
+        const canvas = document.getElementById('particle-canvas');
+        const ctx = canvas.getContext('2d');
+        let particles = [];
+
+        function resizeCanvas() {
+            canvas.width = window.innerWidth;
+            canvas.height = window.innerHeight;
+        }
+        resizeCanvas();
+        window.addEventListener('resize', resizeCanvas);
+
+        class Particle {
+            constructor() {
+                this.reset();
+            }
+            reset() {
+                this.x = Math.random() * canvas.width;
+                this.y = Math.random() * canvas.height;
+                this.size = Math.random() * 1.5 + 0.5;
+                this.speedX = (Math.random() - 0.5) * 0.4;
+                this.speedY = (Math.random() - 0.5) * 0.4;
+                this.opacity = Math.random() * 0.4 + 0.1;
+            }
+            update() {
+                this.x += this.speedX;
+                this.y += this.speedY;
+                if (this.x < 0 || this.x > canvas.width) this.speedX *= -1;
+                if (this.y < 0 || this.y > canvas.height) this.speedY *= -1;
+            }
+            draw() {
+                ctx.beginPath();
+                ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
+                ctx.fillStyle = `rgba(129, 140, 248, ${this.opacity})`;
+                ctx.fill();
+            }
+        }
+
+        // Create particles
+        for (let i = 0; i < 50; i++) {
+            particles.push(new Particle());
+        }
+
+        function drawLines() {
+            for (let i = 0; i < particles.length; i++) {
+                for (let j = i + 1; j < particles.length; j++) {
+                    const dx = particles[i].x - particles[j].x;
+                    const dy = particles[i].y - particles[j].y;
+                    const dist = Math.sqrt(dx * dx + dy * dy);
+                    if (dist < 120) {
+                        ctx.beginPath();
+                        ctx.strokeStyle = `rgba(129, 140, 248, ${0.06 * (1 - dist / 120)})`;
+                        ctx.lineWidth = 0.5;
+                        ctx.moveTo(particles[i].x, particles[i].y);
+                        ctx.lineTo(particles[j].x, particles[j].y);
+                        ctx.stroke();
+                    }
+                }
+            }
+        }
+
+        function animateParticles() {
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+            particles.forEach(p => {
+                p.update();
+                p.draw();
+            });
+            drawLines();
+            requestAnimationFrame(animateParticles);
+        }
+        animateParticles();
+
+        // ===== 7. SMOOTH NAV ACTIVE STATE =====
+        const sections = document.querySelectorAll('section[id]');
+        const navLinks = document.querySelectorAll('.nav-link');
+
+        window.addEventListener('scroll', () => {
+            let current = '';
+            sections.forEach(section => {
+                const top = section.offsetTop - 200;
+                if (window.scrollY >= top) {
+                    current = section.getAttribute('id');
+                }
+            });
+            navLinks.forEach(link => {
+                link.classList.remove('text-indigo-400');
+                if (link.getAttribute('href') === `#${current}`) {
+                    link.classList.add('text-indigo-400');
+                }
+            });
+        });
     </script>
 </body>
 
