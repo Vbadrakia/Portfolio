@@ -1,248 +1,449 @@
 <!DOCTYPE html>
-<html lang="en" class="scroll-smooth">
+<html lang="en">
 
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Vedant Badrakia | Portfolio</title>
-    <script src="https://cdn.tailwindcss.com"></script>
+    <title>Vedant Badrakia | 3D Interactive Portfolio</title>
+    
+    <!-- Meta tags for premium SEO -->
+    <meta name="description" content="Vedant Badrakia's 3D animated engineering portfolio. Specializing in high-performance web applications, JavaScript engineering, and interactive full-stack architecture.">
+    <meta name="keywords" content="Vedant Badrakia, Portfolio, 3D Web Design, Computer Engineering, WebGL, Three.js, React.js, Full Stack">
+    
+    <!-- Premium Fonts & Icons -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Space+Grotesk:wght@400;500;700&display=swap" rel="stylesheet">
     <script src="https://unpkg.com/lucide@latest"></script>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;800&display=swap" rel="stylesheet">
-    <style>
-        body {
-            font-family: 'Inter', sans-serif;
-            background-color: #020617;
-        }
-
-        .glass-nav {
-            background: rgba(2, 6, 23, 0.8);
-            backdrop-filter: blur(12px);
-            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
-        }
-
-        .hero-gradient {
-            background: radial-gradient(circle at 50% 50%, rgba(79, 70, 229, 0.15) 0%, transparent 50%);
-        }
-
-        .animate-fade-in {
-            animation: fadeIn 1s ease-out forwards;
-        }
-
-        @keyframes fadeIn {
-            from {
-                opacity: 0;
-                transform: translateY(20px);
-            }
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
-        }
-
-        .skill-badge {
-            transition: all 0.3s ease;
-        }
-
-        .skill-badge:hover {
-            transform: translateY(-2px);
-            border-color: #6366f1;
-            background: rgba(99, 102, 241, 0.1);
-        }
-    </style>
+    
+    <!-- Custom Style Sheet -->
+    <link rel="stylesheet" href="./style.css">
 </head>
 
-<body class="text-slate-300">
+<body>
 
-    <!-- Navigation -->
-    <nav class="fixed top-0 w-full z-50 glass-nav">
-        <div class="max-w-6xl mx-auto px-6 py-4 flex justify-between items-center">
-            <span class="text-2xl font-extrabold bg-gradient-to-r from-indigo-400 to-cyan-400 bg-clip-text text-transparent underline decoration-indigo-500/20 underline-offset-4">VB.</span>
-            <div class="hidden md:flex gap-8 text-sm font-medium tracking-wide">
-                <a href="#about" class="hover:text-indigo-400 transition-colors">About</a>
-                <a href="#skills" class="hover:text-indigo-400 transition-colors">Skills</a>
-                <a href="#projects" class="hover:text-indigo-400 transition-colors">Projects</a>
-                <a href="#achievements" class="hover:text-indigo-400 transition-colors">Achievements</a>
+    <!-- 1. Ambient Backgrounds -->
+    <div class="ambient-light"></div>
+    <canvas id="hero-canvas"></canvas>
+
+    <!-- 2. Custom Cinematic Cursors -->
+    <div class="custom-cursor"></div>
+    <div class="custom-cursor-glow"></div>
+
+    <!-- 3. Navigation Bar -->
+    <nav>
+        <div class="nav-container">
+            <a href="#about" class="nav-logo">VB.</a>
+            <ul class="nav-links">
+                <li><a href="#about">About</a></li>
+                <li><a href="#experience">Experience</a></li>
+                <li><a href="#skills">Skills</a></li>
+                <li><a href="#projects">Projects</a></li>
+                <li><a href="#achievements">Achievements</a></li>
+            </ul>
+            <div style="display: flex; align-items: center; gap: 1rem;">
+                <a href="./Vedant_Badrakia_Resume.pdf" class="btn btn-outline" download style="padding: 0.6rem 1.25rem; font-size: 0.75rem;">Resume</a>
+                <a href="mailto:vedantbadrakia07@gmail.com" class="btn btn-primary" style="padding: 0.6rem 1.5rem; font-size: 0.75rem;">HIRE ME</a>
             </div>
-            <a href="mailto:vedantbadrakia07@gmail.com" class="bg-indigo-600 hover:bg-indigo-500 text-white px-5 py-2 rounded-full text-xs font-bold transition-all">HIRE ME</a>
         </div>
     </nav>
 
-    <!-- Hero Section -->
-    <section id="about" class="pt-40 pb-20 px-6 hero-gradient">
-        <div class="max-w-4xl mx-auto text-center md:text-left">
-            <div class="animate-fade-in">
-                <p class="text-indigo-400 font-mono mb-4 text-sm tracking-widest uppercase">Available for Internships 2026</p>
-                <h1 class="text-6xl md:text-8xl font-extrabold text-white mb-6 leading-tight">
+    <!-- 4. Hero Section -->
+    <section id="about" class="hero">
+        <div class="container">
+            <div class="hero-content" data-animate>
+                <span class="hero-tag">Available for Internships 2026</span>
+                <h1 class="hero-name">
                     VEDANT <br />
-                    <span class="text-slate-600">BADRAKIA</span>
+                    <span>BADRAKIA</span>
                 </h1>
-                <p class="text-lg md:text-xl text-slate-400 max-w-2xl mb-10 leading-relaxed">
-                    Computer Engineering student at <span class="text-indigo-300">VVP Engineering College</span>. 
-                    Building high-performance web applications with a focus on user experience and clean code.
+                <p class="hero-desc">
+                    Computer Engineering student at <span>VVP Engineering College</span>. 
+                    Building high-performance web applications with a focus on immersive user experience, structural efficiency, and clean codebases.
                 </p>
-                <div class="flex flex-col md:flex-row gap-4 items-center">
-                    <div class="flex gap-4">
-                        <a href="#" class="p-3 bg-slate-800 rounded-xl hover:bg-indigo-600 transition-all text-white"><i data-lucide="github"></i></a>
-                        <a href="#" class="p-3 bg-slate-800 rounded-xl hover:bg-indigo-600 transition-all text-white"><i data-lucide="linkedin"></i></a>
-                        <a href="#" class="p-3 bg-slate-800 rounded-xl hover:bg-indigo-600 transition-all text-white"><i data-lucide="mail"></i></a>
+                <div class="hero-actions">
+                    <div class="social-links" style="align-items: center; display: flex; gap: 1rem;">
+                        <a href="https://github.com/Vbadrakia" target="_blank" class="social-btn" style="display: flex; align-items: center; justify-content: center; padding: 0;" aria-label="GitHub" data-tooltip="GitHub">
+                            <svg viewBox="0 0 24 24" width="18" height="18" fill="currentColor">
+                                <path d="M12 .297c-6.63 0-12 5.373-12 12 0 5.303 3.438 9.8 8.205 11.385.6.113.82-.258.82-.577 0-.285-.01-1.04-.015-2.04-3.338.724-4.042-1.61-4.042-1.61C4.422 18.07 3.633 17.7 3.633 17.7c-1.087-.744.084-.729.084-.729 1.205.084 1.838 1.236 1.838 1.236 1.07 1.835 2.809 1.305 3.495.998.108-.776.417-1.305.76-1.605-2.665-.3-5.466-1.332-5.466-5.93 0-1.31.465-2.38 1.235-3.22-.135-.303-.54-1.523.105-3.176 0 0 1.005-.322 3.3 1.23.96-.267 1.98-.399 3-.405 1.02.006 2.04.138 3 .405 2.28-1.552 3.285-1.23 3.285-1.23.645 1.653.24 2.873.12 3.176.765.84 1.23 1.91 1.23 3.22 0 4.61-2.805 5.625-5.475 5.92.42.36.81 1.096.81 2.22 0 1.606-.015 2.896-.015 3.286 0 .315.21.69.825.57C20.565 22.092 24 17.592 24 12.297c0-6.627-5.373-12-12-12"/>
+                            </svg>
+                        </a>
+                        <a href="https://www.linkedin.com/in/vedant-badrakia/" target="_blank" class="social-btn" style="display: flex; align-items: center; justify-content: center; padding: 0;" aria-label="LinkedIn" data-tooltip="LinkedIn">
+                            <svg viewBox="0 0 24 24" width="18" height="18" fill="currentColor">
+                                <path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0z"/>
+                            </svg>
+                        </a>
+                        <a href="https://leetcode.com/u/vbadrakia/" target="_blank" class="social-btn" style="display: flex; align-items: center; justify-content: center; padding: 0;" aria-label="Leetcode" data-tooltip="LeetCode">
+                            <svg viewBox="0 0 24 24" width="18" height="18" fill="currentColor">
+                                <path d="M13.483 0a1.374 1.374 0 0 0-.961.438L7.116 6.226l-3.854 4.126a5.266 5.266 0 0 0-1.209 2.104 5.35 5.35 0 0 0-.125.513 5.527 5.527 0 0 0 .062 2.362 5.83 5.83 0 0 0 .349 1.017 5.938 5.938 0 0 0 1.271 1.818l4.277 4.193.039.038c2.248 2.165 5.852 2.133 8.063-.074l2.396-2.392c.54-.54.54-1.414.003-1.955a1.378 1.378 0 0 0-1.951-.003l-2.396 2.392a3.021 3.021 0 0 1-4.205.038l-.02-.019-4.276-4.193c-.652-.64-.972-1.469-.948-2.263a2.68 2.68 0 0 1 .066-.523 2.545 2.545 0 0 1 .619-1.164L9.13 8.114c1.058-1.134 3.204-1.27 4.43-.278l3.501 2.831c.593.48 1.461.387 1.94-.207a1.384 1.384 0 0 0-.207-1.943l-3.5-2.831c-.8-.647-1.766-1.045-2.774-1.202l2.015-2.158A1.384 1.384 0 0 0 13.483 0zm-2.866 12.815a1.38 1.38 0 0 0-1.38 1.382 1.38 1.38 0 0 0 1.38 1.382H20.79a1.38 1.38 0 0 0 1.38-1.382 1.38 1.38 0 0 0-1.38-1.382z"/>
+                            </svg>
+                        </a>
+                        <a href="mailto:vedantbadrakia07@gmail.com" class="social-btn" style="display: flex; align-items: center; justify-content: center; padding: 0;" aria-label="Email" data-tooltip="Email">
+                            <svg viewBox="0 0 24 24" width="18" height="18" fill="currentColor">
+                                <path d="M2 5a2 2 0 012-2h16a2 2 0 012 2v14a2 2 0 01-2 2H4a2 2 0 01-2-2V5zm3.256 2l6.244 4.542a1 1 0 001 0L18.744 7H5.256zM4 9.1v8.9a1 1 0 001 1h14a1 1 0 001-1V9.1l-7.382 5.37a3 3 0 01-3.236 0L4 9.1z"/>
+                            </svg>
+                        </a>
                     </div>
-                    <span class="hidden md:block h-px w-12 bg-slate-700"></span>
-                    <span class="text-slate-500 text-sm font-mono italic">Bachelor of Engineering (8.13 SPI)</span>
+                    <span class="hero-spi">// B.E. in Computer Engineering (9.00 SPI)</span>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- Skills Section -->
-    <section id="skills" class="py-24 px-6 bg-slate-900/30">
-        <div class="max-w-6xl mx-auto">
-            <h2 class="text-3xl font-bold text-white mb-12 flex items-center gap-3">
-                <i data-lucide="terminal" class="text-indigo-400"></i> Skill Set
+    <!-- 5. Internship Experience Section -->
+    <section id="experience">
+        <div class="container">
+            <h2 class="section-title" data-animate>
+                <i data-lucide="briefcase"></i> Internship Experience
             </h2>
-            <div class="grid md:grid-cols-3 gap-8">
-                <div class="p-8 bg-slate-900 border border-slate-800 rounded-3xl">
-                    <h3 class="text-xs font-bold text-indigo-400 uppercase tracking-widest mb-6">Languages</h3>
-                    <div class="flex flex-wrap gap-2">
-                        <span class="px-4 py-2 bg-slate-800 rounded-lg text-sm border border-slate-700 skill-badge">Java</span>
-                        <span class="px-4 py-2 bg-slate-800 rounded-lg text-sm border border-slate-700 skill-badge">JavaScript</span>
-                        <span class="px-4 py-2 bg-slate-800 rounded-lg text-sm border border-slate-700 skill-badge">CSS</span>
-                        <span class="px-4 py-2 bg-slate-800 rounded-lg text-sm border border-slate-700 skill-badge">HTML</span>
-                        <span class="px-4 py-2 bg-slate-800 rounded-lg text-sm border border-slate-700 skill-badge">Python</span>
-                        <span class="px-4 py-2 bg-slate-800 rounded-lg text-sm border border-slate-700 skill-badge">MySQL</span>
+            <div class="timeline" data-animate>
+                
+                <!-- Experience Item 1: MindMatrix.io -->
+                <div class="timeline-item">
+                    <div class="timeline-marker"></div>
+                    <div class="timeline-content">
+                        <div class="timeline-header">
+                            <div>
+                                <span class="timeline-role">Android App Development Intern</span><br>
+                                <span class="timeline-company">MindMatrix.io (CL Infotech Pvt. Ltd.), Bangalore</span>
+                            </div>
+                            <span class="timeline-duration">Jan 2026 – Mar 2026</span>
+                        </div>
+                        <ul class="timeline-bullets">
+                            <li>Built the <strong>Employee Performance Tracker</strong> Android app (Kotlin + Jetpack Compose + Room DB) as the primary internship deliverable.</li>
+                            <li>Developed on the <strong>Salesforce platform</strong> using Apex and Flows; prepared documentation and collaborated with cross-functional teams.</li>
+                            <li>Applied <strong>MVVM architecture</strong> and GenAI tools on the MindMatrix Platform across structured internship modules.</li>
+                        </ul>
                     </div>
                 </div>
-                <div class="p-8 bg-slate-900 border border-slate-800 rounded-3xl">
-                    <h3 class="text-xs font-bold text-cyan-400 uppercase tracking-widest mb-6">Frameworks</h3>
-                    <div class="flex flex-wrap gap-2">
-                        <span class="px-4 py-2 bg-slate-800 rounded-lg text-sm border border-slate-700 skill-badge">React.js</span>
-                        <span class="px-4 py-2 bg-slate-800 rounded-lg text-sm border border-slate-700 skill-badge">Node.js</span>
-                        <span class="px-4 py-2 bg-slate-800 rounded-lg text-sm border border-slate-700 skill-badge">Bootstrap</span>
-                        <span class="px-4 py-2 bg-slate-800 rounded-lg text-sm border border-slate-700 skill-badge">TailwindCSS</span>
-                    </div>
-                </div>
-                <div class="p-8 bg-slate-900 border border-slate-800 rounded-3xl">
-                    <h3 class="text-xs font-bold text-purple-400 uppercase tracking-widest mb-6">Tools</h3>
-                    <div class="flex flex-wrap gap-2">
-                        <span class="px-4 py-2 bg-slate-800 rounded-lg text-sm border border-slate-700 skill-badge">GitHUb</span>
-                        <span class="px-4 py-2 bg-slate-800 rounded-lg text-sm border border-slate-700 skill-badge">AI Tools</span>
-                        <span class="px-4 py-2 bg-slate-800 rounded-lg text-sm border border-slate-700 skill-badge">VS Code</span>
-                    </div>
-                </div>
+
             </div>
         </div>
     </section>
 
-    <!-- Projects -->
-    <section id="projects" class="py-24 px-6">
-        <div class="max-w-6xl mx-auto">
-            <div class="flex justify-between items-end mb-12">
-                <div>
-                    <h2 class="text-3xl font-bold text-white flex items-center gap-3">
-                        <i data-lucide="cpu" class="text-indigo-400"></i> Projects
-                    </h2>
-                </div>
-                <a href="#" class="text-sm text-indigo-400 hover:underline">View GitHub <i data-lucide="external-link" class="inline h-3 w-3"></i></a>
-            </div>
-            
-            <div class="grid md:grid-cols-2 gap-10">
-                <!-- Project Card 1 -->
-                <div class="group bg-slate-900 rounded-[2rem] border border-slate-800 p-1 hover:border-indigo-500/50 transition-all">
-                    <div class="bg-slate-950 rounded-[1.8rem] p-8">
-                        <div class="flex justify-between mb-6">
-                            <div class="px-3 py-1 bg-indigo-500/10 text-indigo-400 text-[10px] font-bold tracking-tighter rounded uppercase">MERN STACK</div>
-                        </div>
-                        <h3 class="text-2xl font-bold text-white mb-4">Swiftery Logistics</h3>
-                        <p class="text-slate-400 text-sm leading-relaxed mb-6">
-                            Web-based logistics management system to streamline inventory tracking and enhance customer service. Built with responsive, mobile-friendly UI ensuring accessibility across all devices.
-                        </p>
-                        <div class="flex gap-2 mb-8">
-                            <span class="text-[10px] bg-slate-800 px-2 py-1 rounded">MongoDB</span>
-                            <span class="text-[10px] bg-slate-800 px-2 py-1 rounded">Express.js</span>
-                            <span class="text-[10px] bg-slate-800 px-2 py-1 rounded">React</span>
-                            <span class="text-[10px] bg-slate-800 px-2 py-1 rounded">Node.js</span>
-                        </div>
-                        <button class="w-full py-3 bg-white text-black font-bold rounded-xl flex items-center justify-center gap-2 group-hover:bg-indigo-500 group-hover:text-white transition-all">
-                            View Case Study <i data-lucide="arrow-right" class="h-4 w-4"></i>
-                        </button>
+    <!-- 6. Skills Section -->
+    <section id="skills">
+        <div class="container">
+            <h2 class="section-title" data-animate>
+                <i data-lucide="terminal"></i> Skill Set
+            </h2>
+            <div class="skills-grid" data-animate>
+                
+                <!-- Category 1: Programming Languages -->
+                <div class="glass-card skills-category lang">
+                    <h3>Programming Languages</h3>
+                    <div class="skills-tags">
+                        <span class="skill-tag" data-tooltip="Kotlin 1.9+: Primary programming language for all Android app logic">Kotlin</span>
+                        <span class="skill-tag" data-tooltip="Robust object-oriented programming, data structures, and algorithms">Java</span>
+                        <span class="skill-tag" data-tooltip="Dynamic web application logic, event handlers, and web engineering">JavaScript</span>
+                        <span class="skill-tag" data-tooltip="Relational databases, indexing, schema design, and query writing">MySQL</span>
+                        <span class="skill-tag" data-tooltip="Automation scripting, data structures, and AI utility prototyping">Python</span>
+                        <span class="skill-tag" data-tooltip="Semantic structure and dynamic responsive web layout styling">HTML / CSS</span>
                     </div>
                 </div>
 
-                <!-- Project Card 2 -->
-                <div class="group bg-slate-900 rounded-[2rem] border border-slate-800 p-1 hover:border-cyan-500/50 transition-all">
-                    <div class="bg-slate-950 rounded-[1.8rem] p-8">
-                        <div class="flex justify-between mb-6">
-                            <div class="px-3 py-1 bg-cyan-500/10 text-cyan-400 text-[10px] font-bold tracking-tighter rounded uppercase">E-COMMERCE</div>
-                        </div>
-                        <h3 class="text-2xl font-bold text-white mb-4">Chocolate Paradise</h3>
-                        <p class="text-slate-400 text-sm leading-relaxed mb-6">
-                            Full-stack e-commerce React application with product catalog, shopping cart, admin dashboard, user authentication, wishlist, and checkout functionality.
-                        </p>
-                        <div class="flex gap-2 mb-8">
-                            <span class="text-[10px] bg-slate-800 px-2 py-1 rounded">React</span>
-                            <span class="text-[10px] bg-slate-800 px-2 py-1 rounded">Tailwind CSS</span>
-                            <span class="text-[10px] bg-slate-800 px-2 py-1 rounded">Context API</span>
-                        </div>
-                        <button class="w-full py-3 bg-white text-black font-bold rounded-xl flex items-center justify-center gap-2 group-hover:bg-cyan-500 group-hover:text-white transition-all">
-                            Live Demo <i data-lucide="play" class="h-4 w-4"></i>
-                        </button>
+                <!-- Category 2: UI & Web Frameworks -->
+                <div class="glass-card skills-category frame">
+                    <h3>UI & Web Frameworks</h3>
+                    <div class="skills-tags">
+                        <span class="skill-tag" data-tooltip="Jetpack Compose BOM: Declarative UI framework for native Android development">Jetpack Compose</span>
+                        <span class="skill-tag" data-tooltip="Component-driven front-end web application architecture">React</span>
+                        <span class="skill-tag" data-tooltip="Asynchronous event-driven server runtime environment">NodeJS</span>
+                        <span class="skill-tag" data-tooltip="Rapid responsive utility-first CSS layout styling">Tailwind CSS</span>
+                        <span class="skill-tag" data-tooltip="Mobile-first responsive grids and web UI components library">Bootstrap 5</span>
                     </div>
                 </div>
-            </div>
+
+                <!-- Category 3: Backend & Cloud Services -->
+                <div class="glass-card skills-category backend">
+                    <h3>Backend & Cloud</h3>
+                    <div class="skills-tags">
+                        <span class="skill-tag" data-tooltip="Firebase Cloud DB: Persistent storage and real-time syncing">Firestore / Realtime DB</span>
+                        <span class="skill-tag" data-tooltip="Secure user login flow, credentials, and session state management">Authentication</span>
+                        <span class="skill-tag" data-tooltip="Firestore, Auth, and Analytics Android SDK services bundle">Firebase SDK</span>
+                        <span class="skill-tag" data-tooltip="Flexible schema JSON-like document databases for web servers">MongoDB</span>
+                        <span class="skill-tag" data-tooltip="High-speed REST API development and backend web routing framework">ExpressJS</span>
+                    </div>
+                </div>
+
+                <!-- Category 4: Development Tools & CI/CD -->
+                <div class="glass-card skills-category tools">
+                    <h3>Development Tools</h3>
+                    <div class="skills-tags">
+                        <span class="skill-tag" data-tooltip="Android Studio Hedgehog+: Emulation, profiling, and APK compilation">Android Studio</span>
+                        <span class="skill-tag" data-tooltip="Dependency resolution, task definitions, and automated build pipelines">Gradle</span>
+                        <span class="skill-tag" data-tooltip="Distributed source code versioning, branches, and repository sync">Git & GitHub</span>
+                        <span class="skill-tag" data-tooltip="High-speed code editing, syntax highlighting, and extensions IDE">VS Code</span>
+                    </div>
+                </div>
+
+                <!-- Category 5: Specialized & Design -->
+                <div class="glass-card skills-category design">
+                    <h3>Specialized & Design</h3>
+                    <div class="skills-tags">
+                        <span class="skill-tag" data-tooltip="MPAndroidChart / Compose Charts: Bar, pie, and line graphs for analytics">Compose Charts</span>
+                        <span class="skill-tag" data-tooltip="High-fidelity wireframing and user experience mockups">Figma / Canva</span>
+                        <span class="skill-tag" data-tooltip="Scaffolding code structures, documentation, and prompt design assistance">GenAI Tools</span>
+                        <span class="skill-tag" data-tooltip="Operating system host platforms for virtualization and emulators">Windows / macOS</span>
+                    </div>
+                </div>
+
+                <!-- Category 6: Professional Soft Skills -->
+                <div class="glass-card skills-category soft">
+                    <h3>Professional Strengths</h3>
+                    <div class="skills-tags">
+                        <span class="skill-tag" data-tooltip="Task scheduling, prioritization, and meeting critical sprint milestones">Time Management</span>
+                        <span class="skill-tag" data-tooltip="Leading lab coordination for Code-Relay and national fests (Shaurya 2025)">Leadership</span>
+                        <span class="skill-tag" data-tooltip="Collaborating in cross-functional engineering and design sprint modules">Teamwork</span>
+                        <span class="skill-tag" data-tooltip="Debugging memory leaks, optimizing UI frames, and complex logic issues">Problem Solving</span>
+                    </div>
+                </div>
         </div>
     </section>
 
-    <!-- Achievements Bento Grid -->
-    <section id="achievements" class="py-24 px-6 bg-indigo-950/20">
-        <div class="max-w-6xl mx-auto">
-            <h2 class="text-3xl font-bold text-white mb-12 flex items-center gap-3">
-                <i data-lucide="award" class="text-indigo-400"></i> Honors
+    <!-- 7. Projects Section -->
+    <section id="projects">
+        <div class="container">
+            <h2 class="section-title" data-animate style="justify-content: space-between;">
+                <span style="display: flex; align-items: center; gap: 0.75rem;">
+                    <i data-lucide="cpu"></i> Projects
+                </span>
+                <a href="https://github.com/Vbadrakia" target="_blank" style="font-size: 0.9rem; color: var(--primary); text-decoration: none; font-weight: 500; display: inline-flex; align-items: center; gap: 0.25rem;">
+                    View GitHub <i data-lucide="external-link" style="width: 14px; height: 14px;"></i>
+                </a>
             </h2>
             
-            <div class="grid grid-cols-1 md:grid-cols-4 gap-4 h-full">
-                <div class="md:col-span-2 md:row-span-2 bg-slate-900 p-8 rounded-3xl border border-slate-800 flex flex-col justify-between">
+            <div class="projects-grid" data-animate style="grid-template-columns: repeat(2, 1fr);">
+                
+                <!-- Project 1: Employee Performance Tracker -->
+                <div class="glass-card project-card tracker">
                     <div>
-                        <i data-lucide="book-open" class="text-indigo-400 mb-6"></i>
-                        <h4 class="text-xl font-bold text-white mb-2">Certified Full-Stack Developer</h4>
-                        <p class="text-slate-400">Completed intensive bootcamps at Udemy & IBM (2024-25),
-                        specializing in Modern Web Fundamentals and API architecture.</p>
+                        <div class="project-badge">ANDROID APP</div>
+                        <h3 class="project-title">Employee Tracker</h3>
+                        <p class="project-desc">
+                            Built an Android app to track, evaluate, and analyze employee performance across roles and departments as the primary deliverable of the MindMatrix internship. Implemented CRUD operations, task assignments, and Compose Charts analytics dashboards.
+                        </p>
                     </div>
-                    <div class="mt-8 flex gap-2">
-                        <span class="text-xs font-bold text-slate-500">IBM</span>
-                        <span class="text-xs font-bold text-slate-500">POSTMAN</span>
+                    <div>
+                        <div class="project-tech">
+                            <span class="tech-pill">Kotlin</span>
+                            <span class="tech-pill">Jetpack Compose</span>
+                            <span class="tech-pill">Firebase DB</span>
+                            <span class="tech-pill">MVVM</span>
+                        </div>
+                        <a href="https://github.com/Vbadrakia" target="_blank" class="project-btn">
+                            View App Demo <i data-lucide="play" style="width: 16px; height: 16px;"></i>
+                        </a>
                     </div>
                 </div>
-                <div class="bg-indigo-600 p-6 rounded-3xl text-white">
-                    <h4 class="font-bold mb-2">Event Lead</h4>
-                    <p class="text-xs opacity-80 uppercase tracking-wider mb-2">Shaurya 2025</p>
-                    <p class="text-sm">Coordinated Lab for National-Level Code-Relay fest.</p>
+
+                <!-- Project 2: Swiftery Logistics -->
+                <div class="glass-card project-card logistics">
+                    <div>
+                        <div class="project-badge">MERN STACK</div>
+                        <h3 class="project-title">Swiftery Logistics</h3>
+                        <p class="project-desc">
+                            Developed a web-based logistics management system to streamline inventory tracking and enhance customer service for logistics businesses. Built a responsive, mobile-friendly user interface using HTML5, CSS3, and Bootstrap 5, ensuring accessibility across all devices.
+                        </p>
+                    </div>
+                    <div>
+                        <div class="project-tech">
+                            <span class="tech-pill">MongoDB</span>
+                            <span class="tech-pill">Express.js</span>
+                            <span class="tech-pill">React</span>
+                            <span class="tech-pill">Node.js</span>
+                        </div>
+                        <a href="https://swiftery.pages.dev/" target="_blank" class="project-btn">
+                            Live Demo <i data-lucide="play" style="width: 16px; height: 16px;"></i>
+                        </a>
+                    </div>
                 </div>
-                <div class="bg-slate-800 p-6 rounded-3xl border border-slate-700">
-                    <h4 class="font-bold text-white mb-2 italic underline decoration-indigo-400">Badminton</h4>
-                    <p class="text-sm text-slate-400">Inter-GTU First Runner-Up (Vice-Captain).</p>
+
+                <!-- Project 3: Chocolate Paradise -->
+                <div class="glass-card project-card ecommerce">
+                    <div>
+                        <div class="project-badge">E-COMMERCE</div>
+                        <h3 class="project-title">Chocolate Paradise</h3>
+                        <p class="project-desc">
+                            Designed and developed an E-commerce chocolate store React application utilizing AI Tools. Features product catalogs, shopping carts, admin dashboards, user authentication, wishlists, and secure checkout processes. Deployed on Cloudflare.
+                        </p>
+                    </div>
+                    <div>
+                        <div class="project-tech">
+                            <span class="tech-pill">React</span>
+                            <span class="tech-pill">Tailwind CSS</span>
+                            <span class="tech-pill">Context API</span>
+                        </div>
+                        <a href="https://react-chocolateapp.pages.dev/" target="_blank" class="project-btn">
+                            Live Demo <i data-lucide="play" style="width: 16px; height: 16px;"></i>
+                        </a>
+                    </div>
                 </div>
-                <div class="md:col-span-2 bg-slate-900/50 p-6 rounded-3xl border border-dashed border-slate-700 flex items-center justify-center">
-                    <p class="text-slate-500 font-mono text-sm tracking-widest">
-                        NEXT BIG PROJECT IN PROGRESS...</p>
+
+                <!-- Project 4: Personal Portfolio Website -->
+                <div class="glass-card project-card portfolio">
+                    <div>
+                        <div class="project-badge">PORTFOLIO</div>
+                        <h3 class="project-title">Personal Portfolio</h3>
+                        <p class="project-desc">
+                            Designed and developed a responsive personal portfolio showcasing projects, technical credentials, and custom contact links. Implemented semantic elements to maximize code readability and user accessibility across standard devices.
+                        </p>
+                    </div>
+                    <div>
+                        <div class="project-tech">
+                            <span class="tech-pill">HTML5</span>
+                            <span class="tech-pill">CSS3</span>
+                            <span class="tech-pill">Three.js</span>
+                        </div>
+                        <a href="#" class="project-btn">
+                            Live Showcase <i data-lucide="external-link" style="width: 16px; height: 16px;"></i>
+                        </a>
+                    </div>
                 </div>
+
             </div>
         </div>
     </section>
 
-    <!-- Footer -->
-    <footer class="py-12 px-6 border-t border-slate-900">
-        <div class="max-w-6xl mx-auto flex flex-col md:flex-row justify-between items-center gap-6">
-            <p class="text-slate-600 text-sm">© 2025 Vedant Badrakia. Designed for Excellence.</p>
-            <div class="flex gap-6">
-                <a href="#" class="text-slate-500 hover:text-white transition-colors"><i data-lucide="github" class="h-5 w-5"></i></a>
-                <a href="#" class="text-slate-500 hover:text-white transition-colors"><i data-lucide="linkedin" class="h-5 w-5"></i></a>
-                <a href="#" class="text-slate-500 hover:text-white transition-colors"><i data-lucide="mail" class="h-5 w-5"></i></a>
+    <!-- 8. Achievements Bento Grid -->
+    <section id="achievements">
+        <div class="container">
+            <h2 class="section-title" data-animate>
+                <i data-lucide="award"></i> Honors & Education
+            </h2>
+            
+            <div class="bento-grid" data-animate>
+                
+                <!-- Bento Block 1: Certified Developer (IBM / Postman) -->
+                <div class="glass-card bento-card bento-main">
+                    <div>
+                        <i data-lucide="book-open"></i>
+                        <h4>Credentials & Certifications</h4>
+                        <p style="margin-bottom: 0.5rem;">• <strong>Web Development Bootcamp</strong> – Udemy (2024)</p>
+                        <p style="margin-bottom: 0.5rem;">• <strong>Web Development Fundamentals</strong> – IBM (2024-25)</p>
+                        <p>• <strong>Postman API Fundamentals</strong> – Postman (2024)</p>
+                    </div>
+                    <div class="bento-footer">
+                        <span>Udemy</span>
+                        <span>IBM</span>
+                        <span>Postman</span>
+                    </div>
+                </div>
+
+                <!-- Bento Block 2: B.E. Computer Engineering (VVP Engineering College) -->
+                <div class="glass-card bento-card bento-span-2" style="display: flex; flex-direction: column; justify-content: space-between; padding: 2rem; background: var(--bg-card); text-align: left;">
+                    <div>
+                        <div style="display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 1rem;">
+                            <div>
+                                <h4 style="font-size: 1.25rem; color: white; margin-bottom: 0.25rem;">VVP Engineering College</h4>
+                                <p style="font-size: 0.85rem; color: var(--secondary); font-weight: 600;">Vyavasayi Vidya Pratishthan</p>
+                            </div>
+                            <i data-lucide="graduation-cap" style="font-size: 1.75rem; color: var(--secondary); margin-bottom: 0;"></i>
+                        </div>
+                        <p style="font-size: 0.9rem; color: var(--text-main); margin-bottom: 0.5rem;">
+                            <strong>Bachelor of Engineering (B.E.)</strong> in Computer Engineering
+                        </p>
+                        <p style="font-size: 0.85rem; color: var(--text-muted);">
+                            Graduating Expected June 2026
+                        </p>
+                    </div>
+                    <div class="bento-footer" style="margin-top: 1.5rem; display: flex; justify-content: space-between; align-items: center; width: 100%;">
+                        <span style="color: var(--secondary); font-weight: 800;">GPA: 9.00 SPI</span>
+                        <span style="font-size: 0.7rem; color: var(--text-darker); text-transform: uppercase;">Active</span>
+                    </div>
+                </div>
+
+                <!-- Bento Block 3: Event Coordinator Shaurya -->
+                <div class="glass-card bento-card bento-lead">
+                    <div>
+                        <div class="bento-subtitle">Shaurya 2025</div>
+                        <h4>Event Coordinator</h4>
+                    </div>
+                    <p>Led the lab coordination for the Code-Relay at "Shaurya" National-Level Fest (2025).</p>
+                </div>
+
+                <!-- Bento Block 4: Badminton Vice-Captain -->
+                <div class="glass-card bento-card bento-sports">
+                    <div>
+                        <h4>Inter-GTU Badminton</h4>
+                        <p>First & Runner-Up (Vice-Captain) (2023, 2024).</p>
+                    </div>
+                </div>
+
+                <!-- Bento Block 5: Secondary Education (Utkarsh School of Excellence) -->
+                <div class="glass-card bento-card bento-span-2" style="display: flex; flex-direction: column; justify-content: space-between; padding: 2rem; background: var(--bg-card); text-align: left;">
+                    <div>
+                        <div style="display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 1rem;">
+                            <div>
+                                <h4 style="font-size: 1.25rem; color: white; margin-bottom: 0.25rem;">Utkarsh School of Excellence</h4>
+                                <p style="font-size: 0.85rem; color: var(--text-muted); font-weight: 500;">Secondary & Higher Secondary</p>
+                            </div>
+                            <i data-lucide="school" style="font-size: 1.75rem; color: var(--text-darker); margin-bottom: 0;"></i>
+                        </div>
+                        <p style="font-size: 0.9rem; color: var(--text-muted); line-height: 1.4;">
+                            Gujarat Higher Secondary Education Board (GHSEB)
+                        </p>
+                    </div>
+                    <div class="bento-footer" style="margin-top: 1.5rem;">
+                        <span style="font-size: 0.75rem; color: var(--text-darker);">Completed May 2022</span>
+                    </div>
+                </div>
+
+                <!-- Bento Block 6: Future Milestones / Open for Opportunities -->
+                <div class="glass-card bento-card bento-next" style="padding: 2rem; display: flex; flex-direction: column; justify-content: center; align-items: center; text-align: center;">
+                    <div>
+                        <i data-lucide="compass" style="font-size: 2rem; color: var(--primary); margin-bottom: 1rem;"></i>
+                        <p style="font-family: monospace; font-size: 0.9rem; letter-spacing: 2px; color: var(--text-main); font-weight: 700; text-transform: uppercase;">
+                            Open for Opportunities
+                        </p>
+                        <p style="font-size: 0.8rem; color: var(--text-muted); margin-top: 0.5rem; max-width: 250px;">
+                            Actively seeking Software Engineering roles starting mid-2026.
+                        </p>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- 9. Footer -->
+    <footer>
+        <div class="container">
+            <div class="footer-container">
+                <p class="footer-copy">© 2026 Vedant Badrakia. Designed for Excellence.</p>
+                <div class="social-links" style="align-items: center; display: flex; gap: 0.75rem;">
+                    <a href="https://github.com/Vbadrakia" target="_blank" class="social-btn" style="width: 38px; height: 38px; display: flex; align-items: center; justify-content: center; padding: 0;" aria-label="GitHub" data-tooltip="GitHub">
+                        <svg viewBox="0 0 24 24" width="16" height="16" fill="currentColor">
+                            <path d="M12 .297c-6.63 0-12 5.373-12 12 0 5.303 3.438 9.8 8.205 11.385.6.113.82-.258.82-.577 0-.285-.01-1.04-.015-2.04-3.338.724-4.042-1.61-4.042-1.61C4.422 18.07 3.633 17.7 3.633 17.7c-1.087-.744.084-.729.084-.729 1.205.084 1.838 1.236 1.838 1.236 1.07 1.835 2.809 1.305 3.495.998.108-.776.417-1.305.76-1.605-2.665-.3-5.466-1.332-5.466-5.93 0-1.31.465-2.38 1.235-3.22-.135-.303-.54-1.523.105-3.176 0 0 1.005-.322 3.3 1.23.96-.267 1.98-.399 3-.405 1.02.006 2.04.138 3 .405 2.28-1.552 3.285-1.23 3.285-1.23.645 1.653.24 2.873.12 3.176.765.84 1.23 1.91 1.23 3.22 0 4.61-2.805 5.625-5.475 5.92.42.36.81 1.096.81 2.22 0 1.606-.015 2.896-.015 3.286 0 .315.21.69.825.57C20.565 22.092 24 17.592 24 12.297c0-6.627-5.373-12-12-12"/>
+                        </svg>
+                    </a>
+                    <a href="https://www.linkedin.com/in/vedant-badrakia/" target="_blank" class="social-btn" style="width: 38px; height: 38px; display: flex; align-items: center; justify-content: center; padding: 0;" aria-label="LinkedIn" data-tooltip="LinkedIn">
+                        <svg viewBox="0 0 24 24" width="16" height="16" fill="currentColor">
+                            <path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0z"/>
+                        </svg>
+                    </a>
+                    <a href="https://leetcode.com/u/vbadrakia/" target="_blank" class="social-btn" style="width: 38px; height: 38px; display: flex; align-items: center; justify-content: center; padding: 0;" aria-label="Leetcode" data-tooltip="LeetCode">
+                        <svg viewBox="0 0 24 24" width="16" height="16" fill="currentColor">
+                            <path d="M13.483 0a1.374 1.374 0 0 0-.961.438L7.116 6.226l-3.854 4.126a5.266 5.266 0 0 0-1.209 2.104 5.35 5.35 0 0 0-.125.513 5.527 5.527 0 0 0 .062 2.362 5.83 5.83 0 0 0 .349 1.017 5.938 5.938 0 0 0 1.271 1.818l4.277 4.193.039.038c2.248 2.165 5.852 2.133 8.063-.074l2.396-2.392c.54-.54.54-1.414.003-1.955a1.378 1.378 0 0 0-1.951-.003l-2.396 2.392a3.021 3.021 0 0 1-4.205.038l-.02-.019-4.276-4.193c-.652-.64-.972-1.469-.948-2.263a2.68 2.68 0 0 1 .066-.523 2.545 2.545 0 0 1 .619-1.164L9.13 8.114c1.058-1.134 3.204-1.27 4.43-.278l3.501 2.831c.593.48 1.461.387 1.94-.207a1.384 1.384 0 0 0-.207-1.943l-3.5-2.831c-.8-.647-1.766-1.045-2.774-1.202l2.015-2.158A1.384 1.384 0 0 0 13.483 0zm-2.866 12.815a1.38 1.38 0 0 0-1.38 1.382 1.38 1.38 0 0 0 1.38 1.382H20.79a1.38 1.38 0 0 0 1.38-1.382 1.38 1.38 0 0 0-1.38-1.382z"/>
+                        </svg>
+                    </a>
+                    <a href="mailto:vedantbadrakia07@gmail.com" class="social-btn" style="width: 38px; height: 38px; display: flex; align-items: center; justify-content: center; padding: 0;" aria-label="Email" data-tooltip="Email">
+                        <svg viewBox="0 0 24 24" width="16" height="16" fill="currentColor">
+                            <path d="M2 5a2 2 0 012-2h16a2 2 0 012 2v14a2 2 0 01-2 2H4a2 2 0 01-2-2V5zm3.256 2l6.244 4.542a1 1 0 001 0L18.744 7H5.256zM4 9.1v8.9a1 1 0 001 1h14a1 1 0 001-1V9.1l-7.382 5.37a3 3 0 01-3.236 0L4 9.1z"/>
+                        </svg>
+                    </a>
+                </div>
             </div>
         </div>
     </footer>
 
+    <!-- Lucide Icons loader script -->
     <script>
-        lucide.createIcons(); 
+        lucide.createIcons();
     </script>
+    
+    <!-- Three.js + Modules -->
+    <script type="module" src="./js/hero-scene.js"></script>
+    <script src="./js/scroll-animations.js" defer></script>
+    <script src="./js/cursor-effects.js" defer></script>
 </body>
 
 </html>
